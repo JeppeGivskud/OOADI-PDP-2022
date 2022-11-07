@@ -15,7 +15,6 @@ class ClientThread(threading.Thread):
                     print("Closing connection")
                     break
 
-
 if __name__=="__main__":
     host = 'localhost'
     port = 50000
@@ -23,7 +22,7 @@ if __name__=="__main__":
         s.bind((host, port))
         s.listen()
         range=0
-        while range<2:
+        while range<1:
             client_socket, client_address = s.accept()   # connect to a new client
             client_thread = ClientThread(client_socket)  # start a new thread
             client_thread.start()
