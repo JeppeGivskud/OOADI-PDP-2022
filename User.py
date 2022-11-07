@@ -14,6 +14,7 @@ class SupportStaff(User):
 
     def change_user_info(self,User):
         print(User)
+        User.user_password=333
 
 class CostumerWithProfile(User):
     def __init__(self, user_name, user_password,phone_number, user_id, name, e_mail):
