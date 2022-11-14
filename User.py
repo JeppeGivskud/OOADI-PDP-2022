@@ -6,14 +6,13 @@ import pickle
 
 class User():
     def __init__(self, name, e_mail):
-        self.user_id = "cheese"
-        self.GenerateID()
+        self.user_id = self.GenerateID()
         self.name = name
         self.e_mail = e_mail
 
     def GenerateID(self):
-        self.user_id = random.randint(0, 999999)
-
+        random_id = random.randint(0, 999999)
+        return random_id
 
 class SupportStaff(User):
     def __init__(self, user_name, user_password, name, e_mail):
@@ -25,17 +24,16 @@ class SupportStaff(User):
         print(User)
         User.user_password = 333
 
-
 class CostumerWithProfile(User):
     def __init__(self, user_name, user_password, phone_number, name, e_mail):
         super().__init__(name, e_mail)
         self.user_password = user_password
         self.user_name = user_name
         self.phone_number = phone_number
-        self.Orderlist = []
+        self.order_list = []
 
     def retrieve_orderlist(self, Orderlist):
-        self.Orderlist.append(Orderlist)
+        self.order_list.append(Orderlist)
 
 
 class CustomerWithoutProfile(User):
@@ -70,6 +68,7 @@ class TivoliManagement(User):
         pass
 
 
+"""Example of two costumers
 Costumer1 = CostumerWithProfile("username", "password", "62709977", "Dave", "Dave@gmail.com")
 Costumer2 = CostumerWithProfile("username2", "password2", "62709957", "Jane", "Jane@gmail.com")
 
@@ -82,6 +81,5 @@ filename = "TwoTestCostumers.txt"
 with open(filename, "rb") as pickle_file:       # Open the file to read from
     my_dog = pickle.load(pickle_file)             # Load first object
     your_dog = pickle.load(pickle_file)
-
-print(my_dog)
-print(your_dog.name)
+    your_dog2 = pickle.load(pickle_file)
+"""
