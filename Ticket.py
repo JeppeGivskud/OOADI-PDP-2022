@@ -6,7 +6,6 @@ class Ticket:
     ticket_id = "ticket id"
     ticket_used = False
     ticket_sold = False
-    numberOfTickets = 0
 
     def __init__(self):
         print("init called")
