@@ -9,15 +9,19 @@ class ClientThread(threading.Thread):
         with self.csocket:
             while True:
                 data = self.csocket.recv(1024)          # data received from client
-                print(data)
+                self.check_password(data)
+                print(f"{data} is cool")
                 self.csocket.sendall(data)          # send back echo string to client
                 if (data.decode() == 'Bye'):
                     print("Closing connection")
                     break
+    def check_password(self,username):
+        if username == b'yvonne':
+            self.csocket.sendall(b'This user is in our database')
 
 if __name__=="__main__":
     host = 'localhost'
-    port = 50000
+    port = 40000
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
         s.listen()
