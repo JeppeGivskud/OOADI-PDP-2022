@@ -8,7 +8,7 @@ class Ticket:
     ticket_sold = False
 
     def __init__(self):
-        print("init called")
+        self.generate_random_ticket_id()
 
     def generate_random_ticket_id(self):
         letters2 = string.ascii_lowercase
