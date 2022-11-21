@@ -47,9 +47,9 @@ class CostumerWithProfile(User):
         new_order=Order()
         self.order_list.append(new_order)
         index = self.order_list.index(new_order)
-        self.order_list[index].create_sold_ticket(self.user_id)
-        self.order_list[index].create_sold_ticket(self.user_id)
-        self.order_list[index].create_sold_ticket(self.user_id)
+        self.order_list[index].create_sold_ticket(self.user_id,"29/3")
+        self.order_list[index].create_sold_ticket(self.user_id,"29/3")
+        self.order_list[index].create_sold_ticket(self.user_id,"29/3")
 
 
 if __name__ == "__main__":
@@ -58,6 +58,11 @@ if __name__ == "__main__":
     Costumer1.add_order()
     Costumer1.add_order()
     print(Costumer1.order_list)
+    print(Costumer1.order_list[0].order_id)
+    print(Costumer1.order_list[0].ticket_list[0].sold_ticket.ticket_id)
+    print(Costumer1.order_list[0].ticket_list[0].sold_ticket.ticket_type)
+    print(Costumer1.order_list[0].ticket_list[0].date)
+
 
 """Example of two costumers
 Costumer1 = CostumerWithProfile("username", "password", "62709977", "Dave", "Dave@gmail.com")

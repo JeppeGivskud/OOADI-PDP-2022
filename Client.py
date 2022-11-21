@@ -29,7 +29,7 @@ class Client():
 if __name__=="__main__":
     C = Client()
     C.connect()
-    C.send("Cheese")
+    C.send("password")
     C.send("Ball")
     C.send("Fish")
     while True:

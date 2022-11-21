@@ -10,6 +10,7 @@ class OneDayTicket(Ticket):
         super().__init__()
         self.date = date
         self.set_ticket_type_to_OneDay()
+        self.ticket_type="One Day Ticket"
 
 
     def set_ticket_type_to_OneDay(self):

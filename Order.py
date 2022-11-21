@@ -7,7 +7,7 @@ from User import*
 class Order:
     def __init__(self):
         self.order_id = self.generate_random_order_id()
-        self.soldTickets = []
+        self.ticket_list = []
 
     def generate_random_order_id(self):
         letters2 = string.ascii_lowercase
@@ -17,9 +17,11 @@ class Order:
         return self.order_id
 
     def collect_sold_tickets(self, sold_ticket):
-        self.soldTickets.append(sold_ticket)
-    def create_sold_ticket(self,owner_name):
-        self.soldTickets.append(SoldTicket(owner_name))
+        self.ticket_list.append(sold_ticket)
+    def create_sold_ticket(self,owner_name,date):
+        self.ticket_list.append(SoldTicket(owner_name, date))
+        self.ticket_list.append(SoldTicket(owner_name, date))
+        self.ticket_list.append(SoldTicket(owner_name, date))
 
 if __name__ == "__main__":
     MyUser = User("Yvonne Nielsen", "iamyvonne@nielsen.dk")
@@ -44,8 +46,8 @@ if __name__ == "__main__":
     print(SoldTicket2.sold_ticket)
     print(SoldTicket2.owner_id)
     print(Order1.order_id)
-    print(Order1.soldTickets[0].ticket_id)
-    print(Order1.soldTickets[1].ticket_id)
+    print(Order1.ticket_list[0].ticket_id)
+    print(Order1.ticket_list[1].ticket_id)
     # Eksempel på at lave to tickets og en order som indeholder de tickets
     filename = "OrderExample.txt"  # File to save the pickled objects
     with open(filename, 'wb') as pickle_file:  # Context manager to pickle the objects
