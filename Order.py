@@ -1,31 +1,51 @@
 import pickle
 from OneDayTicket import*
-class Orders:
+from SoldTicket import*
+from User import*
+
+
+class Order:
     def __init__(self):
         self.order_id = self.generate_random_order_id()
-        self.tickets = []
+        self.soldTickets = []
 
     def generate_random_order_id(self):
         letters2 = string.ascii_lowercase
         return ''.join(random.choice(letters2) for i in range(10))
+
     def get_order_id(self):
         return self.order_id
 
-    def collect_tickets(self, sold_ticket):
-        self.tickets.append(sold_ticket)
+    def collect_sold_tickets(self, sold_ticket):
+        self.soldTickets.append(sold_ticket)
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
+    MyUser = User("Yvonne Nielsen", "iamyvonne@nielsen.dk")
+    MyUser.GenerateID()
+
     Ticket1 = OneDayTicket("21/09")
     Ticket2 = OneDayTicket("29/09")
-    Order1 = Orders()
-    Order1.collect_tickets(Ticket1)
-    Order1.collect_tickets(Ticket2)
+    SoldTicket1 = SoldTicket()
+    SoldTicket1.collect_ticket(Ticket1)
+    SoldTicket1.set_owner_id(MyUser.user_id)
 
+    SoldTicket2 = SoldTicket()
+    SoldTicket2.collect_ticket(Ticket2)
+    SoldTicket2.set_owner_id(MyUser.user_id)
+
+    Order1 = Order()
+    Order1.collect_sold_tickets(SoldTicket1)
+    Order1.collect_sold_tickets(SoldTicket2)
+
+    print(SoldTicket1.sold_ticket)
+    print(SoldTicket1.owner_id)
+    print(SoldTicket2.sold_ticket)
+    print(SoldTicket2.owner_id)
     print(Order1.order_id)
     print(Order1.tickets[0].ticket_id)
     print(Order1.tickets[1].ticket_id)
-    #Eksempel på at lave to tickets og en order som indeholder de tickets
+    # Eksempel på at lave to tickets og en order som indeholder de tickets
     filename = "OrderExample.txt"  # File to save the pickled objects
     with open(filename, 'wb') as pickle_file:  # Context manager to pickle the objects
         pickle.dump(Ticket1, pickle_file)  # Pickle my dog into file
@@ -35,4 +55,3 @@ if __name__=="__main__":
         your_dog = pickle.load(pickle_file)
         print(my_dog.ticket_id)
         print(your_dog.ticket_id)
-
