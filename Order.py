@@ -18,6 +18,8 @@ class Order:
 
     def collect_sold_tickets(self, sold_ticket):
         self.soldTickets.append(sold_ticket)
+    def create_sold_ticket(self,owner_name):
+        self.soldTickets.append(SoldTicket(owner_name))
 
 if __name__ == "__main__":
     MyUser = User("Yvonne Nielsen", "iamyvonne@nielsen.dk")

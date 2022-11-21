@@ -43,10 +43,21 @@ class CostumerWithProfile(User):
     def set_phone_number(self, new_phone_nr):
         self.phone_number = new_phone_nr
 
-    def set_orderlist(self, Orderlist):
-        self.order_list = Orderlist
+    def add_order(self):
+        new_order=Order()
+        self.order_list.append(new_order)
+        index = self.order_list.index(new_order)
+        self.order_list[index].create_sold_ticket(self.user_id)
+        self.order_list[index].create_sold_ticket(self.user_id)
+        self.order_list[index].create_sold_ticket(self.user_id)
 
 
+if __name__ == "__main__":
+    Costumer1 = CostumerWithProfile("username", "password", "62709977", "Dave", "Dave@gmail.com")
+    Costumer1.add_order()
+    Costumer1.add_order()
+    Costumer1.add_order()
+    print(Costumer1.order_list)
 
 """Example of two costumers
 Costumer1 = CostumerWithProfile("username", "password", "62709977", "Dave", "Dave@gmail.com")
