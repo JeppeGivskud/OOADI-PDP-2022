@@ -11,8 +11,8 @@ class Ticket:
         self.generate_random_ticket_id()
 
     def generate_random_ticket_id(self):
-        letters2 = string.ascii_lowercase
-        self.ticket_id = ''.join(random.choice(letters2) for i in range(10))
+        letters = string.ascii_lowercase  #disse to strimler af kode laver et tilfældig string i lower case
+        self.ticket_id = ''.join(random.choice(letters) for i in range(10))
 
     def use_ticket(self):
         self.ticket_used = True
