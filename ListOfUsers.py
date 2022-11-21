@@ -27,3 +27,6 @@ if __name__=="__main__":
     All_Users =ListOfUsers()
     All_Users.Example()
     print(All_Users.customers[0].name)
+    filename = "AllUsers.txt"  # File to save the pickled objects
+    with open(filename, 'wb') as pickle_file:  # Context manager to pickle the objects
+        pickle.dump(All_Users, pickle_file)  # Pickle my dog into file
