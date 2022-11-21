@@ -24,13 +24,11 @@ class Client():
     def disconnect(self):
         self.send("Bye")
 
-
-"""
-C = Client()
-C.connect()
-C.send("Cheese")
-C.send("Ball")
-C.send("Fish")
-C.send(input())
-C.disconnect()
-"""
+if __name__=="__main__":
+    C = Client()
+    C.connect()
+    C.send("Cheese")
+    C.send("Ball")
+    C.send("Fish")
+    C.send(input())
+    C.disconnect()
