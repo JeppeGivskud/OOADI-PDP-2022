@@ -5,7 +5,7 @@ import socket
 class Client():
     def __init__(self):
         self.HOST = '127.0.0.1'
-        self.PORT = 50000
+        self.PORT = 40000
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connect(self):
@@ -24,13 +24,11 @@ class Client():
     def disconnect(self):
         self.send("Bye")
 
-
-"""
-C = Client()
-C.connect()
-C.send("Cheese")
-C.send("Ball")
-C.send("Fish")
-C.send(input())
-C.disconnect()
-"""
+if __name__=="__main__":
+    C = Client()
+    C.connect()
+    C.send("Cheese")
+    C.send("Ball")
+    C.send("Fish")
+    C.send(input())
+    C.disconnect()
