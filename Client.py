@@ -1,5 +1,6 @@
 import socket
 
+
 # No s.close is needed
 class Client():
     def __init__(self):
@@ -16,13 +17,15 @@ class Client():
 
     def recieve(self):
         data = self.socket.recv(1024)
-        print('Received', repr(data))
+        print('Ecco', repr(data))
         if data.decode() == 'Bye':
             print("Closing connection")
+
     def disconnect(self):
         self.send("Bye")
 
 
+"""
 C = Client()
 C.connect()
 C.send("Cheese")
@@ -30,3 +33,4 @@ C.send("Ball")
 C.send("Fish")
 C.send(input())
 C.disconnect()
+"""

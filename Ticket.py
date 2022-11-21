@@ -6,10 +6,9 @@ class Ticket:
     ticket_id = "ticket id"
     ticket_used = False
     ticket_sold = False
-    numberOfTickets = 0
 
     def __init__(self):
-        print("init called")
+        self.generate_random_ticket_id()
 
     def generate_random_ticket_id(self):
         letters2 = string.ascii_lowercase
