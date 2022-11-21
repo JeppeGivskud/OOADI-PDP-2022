@@ -13,11 +13,5 @@ class OneDayTicket(Ticket):
 
 
     def set_ticket_type_to_OneDay(self):
-        letters2 = string.ascii_lowercase
         self.ticket_id = "1D" + self.ticket_id
 
-
-if __name__ == "__main__":
-
-    ohi = OneDayTicket("12/13")
-    print(ohi.ticket_id)

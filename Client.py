@@ -1,6 +1,5 @@
 import socket
 
-
 # No s.close is needed
 class Client():
     def __init__(self):
@@ -24,11 +23,15 @@ class Client():
     def disconnect(self):
         self.send("Bye")
 
+
+
+
 if __name__=="__main__":
     C = Client()
     C.connect()
     C.send("Cheese")
     C.send("Ball")
     C.send("Fish")
-    C.send(input())
-    C.disconnect()
+    while True:
+        C.send(input())
+   # C.disconnect()
