@@ -1,6 +1,9 @@
+from OneDayTicket import*
+
+
 class SoldTicket:
 
-    def __init__(self, user_id, ticket):
+    def __init__(self):
         self.owner_id = owner_id
         self.sold_ticket = sold_ticket
 
