@@ -1,10 +1,12 @@
 import socket
 import threading
-
+from ListOfUsers import*
 class ClientThread(threading.Thread):
     def __init__(self, client_socket):
         threading.Thread.__init__(self)
         self.csocket = client_socket
+        self.Database=ListOfUsers #initiere en database som kan tilføje brugerobjekter
+        ListOfUsers.Example() #Laver 4 brugere som kan bruges som eksempler
     def run(self):
         with self.csocket:
             while True:

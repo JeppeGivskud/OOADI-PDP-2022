@@ -19,7 +19,6 @@ class Order:
     def collect_sold_tickets(self, sold_ticket):
         self.soldTickets.append(sold_ticket)
 
-
 if __name__ == "__main__":
     MyUser = User("Yvonne Nielsen", "iamyvonne@nielsen.dk")
     MyUser.GenerateID()
@@ -43,15 +42,9 @@ if __name__ == "__main__":
     print(SoldTicket2.sold_ticket)
     print(SoldTicket2.owner_id)
     print(Order1.order_id)
-    print(Order1.tickets[0].ticket_id)
-    print(Order1.tickets[1].ticket_id)
+    print(Order1.soldTickets[0].ticket_id)
+    print(Order1.soldTickets[1].ticket_id)
     # Eksempel på at lave to tickets og en order som indeholder de tickets
     filename = "OrderExample.txt"  # File to save the pickled objects
     with open(filename, 'wb') as pickle_file:  # Context manager to pickle the objects
-        pickle.dump(Ticket1, pickle_file)  # Pickle my dog into file
-        pickle.dump(Ticket2, pickle_file)  # Pickle your dog into file
-    with open(filename, "rb") as pickle_file:       # Open the file to read from
-        my_dog = pickle.load(pickle_file)             # Load first object
-        your_dog = pickle.load(pickle_file)
-        print(my_dog.ticket_id)
-        print(your_dog.ticket_id)
+        pickle.dump(Order1, pickle_file)  # Pickle my dog into file
