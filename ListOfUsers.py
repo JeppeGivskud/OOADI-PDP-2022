@@ -4,7 +4,10 @@ class ListOfUsers():
     def __init__(self):
 
         self.customers= []
-
+    def __repr__(self):
+        for x in self.customers:
+          print(f' Costumer: "{x.name}" has email:"{x.e_mail}" and phone number "{x.phone_number}"')
+        return repr('Thats all' ) #bliver ikke rigtig brugt men repr skal åbenbart have en return
     def add_customer(self,customer):
         self.customers.append(customer)
 
@@ -22,11 +25,15 @@ class ListOfUsers():
         self.add_customer(User2)
         self.add_customer(User3)
         self.add_customer(User4)
+        filename = "AllUsers.txt"  # File to save the pickled objects
+        with open(filename, 'wb') as pickle_file:  # Context manager to pickle the objects
+            pickle.dump(self, pickle_file)  # Pickle my dog into file
 
 if __name__=="__main__":
     All_Users =ListOfUsers()
     All_Users.Example()
+    """
     print(All_Users.customers[0].name)
     filename = "AllUsers.txt"  # File to save the pickled objects
     with open(filename, 'wb') as pickle_file:  # Context manager to pickle the objects
-        pickle.dump(All_Users, pickle_file)  # Pickle my dog into file
+        pickle.dump(All_Users, pickle_file)  # Pickle my dog into file"""
