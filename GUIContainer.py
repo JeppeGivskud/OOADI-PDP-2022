@@ -143,7 +143,6 @@ class GUIUserProfile(tk.Frame):
         buy_ticket_button.grid(row=5, column=7)
 
 
-
 if __name__ == "__main__":
     myapp = ChangeFrames()
     myapp.mainloop()
