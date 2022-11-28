@@ -24,9 +24,14 @@ class Client():
         self.socket.sendall(message.encode())
         self.recieve_object()
 
+    def login(self,username,password):
+        message= f"{username};{password}"
+        self.socket.sendall(message.encode())
+        self.recieve_object()
+
     def recieve_text(self):
         data = self.socket.recv(1024)
-        print('Ecco', repr(data))
+        print('From server:', data.decode())
         if data.decode() == 'Bye':
             print("Closing connection")
     def recieve_object(self):
@@ -44,7 +49,8 @@ class Client():
 
 if __name__=="__main__":
     C = Client()
-    message = input("What would you like? ")
+    username = input("Username: ")
+    password = input("Password: ")
 
-    C.request_object(message)
+    C.login(username,password)
     C.disconnect()

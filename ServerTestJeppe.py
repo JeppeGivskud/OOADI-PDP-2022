@@ -26,23 +26,31 @@ class ClientThread(threading.Thread):
 
     def run(self):
         with self.csocket:
-            self.csocket.sendall(b'Server connection')  # send string to client
+            self.csocket.sendall(b'Connected to server')  # send string to client
             while True:
                 data = self.csocket.recv(1024)  # data received from client
-                self.check_password(data)
-                self.csocket.sendall(data)  # send back echo string to client
+
+                datastring=data.decode()
+                datastring=datastring.split(";")
+                print(datastring)
+                self.login(datastring[0],datastring[1])
+                #self.check_password(data)
+                #self.csocket.sendall(data)  # send back echo string to client
                 if (data.decode() == 'Bye'):
                     print("Closing connection")
                     break
 
-    def check_password(self, username):
-        if username == b'yvonne':
-            self.send_pickled_object(self.database)
+    def login(self,username,password):
+        for user in self.database.customers:
+            if user.name == username:
+                print("correct username")
+                if user.user_password == password:
+                    print("correct password")
+                    self.send_pickled_object(user)
     def send_pickled_object(self,object):
         data_string = pickle.dumps(object)
         self.csocket.sendall(data_string)  # send back echo string to client
         print(f"Object sent to Server")
-
 
 if __name__ == "__main__":
     host = 'localhost'
