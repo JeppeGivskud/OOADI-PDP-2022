@@ -48,10 +48,10 @@ class Client():
             print(data_variable)
             self.UserData = data_variable
             print(self.UserData.order_list)
-            print(self.UserData.order_list[0].order_id)
-            print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_id)
-            print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_type)
-            print(self.UserData.order_list[0].ticket_list[0].date)
+            #print(self.UserData.order_list[0].order_id)
+           # print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_id)
+           # print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_type)
+            #print(self.UserData.order_list[0].ticket_list[0].date)
 
     def disconnect(self):
         self.send_text("Bye")
