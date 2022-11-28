@@ -2,7 +2,7 @@ from PIL import ImageTk, Image
 import tkinter as tk
 from tkinter import messagebox
 from GUIContainer import*
-from GUIStartPage import*
+from GUIStartPage import GUIStartPage
 from GUILogin import*
 
 class GUIUserProfile(tk.Frame):
