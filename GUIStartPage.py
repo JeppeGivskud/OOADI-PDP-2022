@@ -1,7 +1,7 @@
 from PIL import ImageTk, Image
 import tkinter as tk
 from GUIContainer import*
-from GUILogin import*
+from GUILogin import GUILogInPage
 
 class GUIStartPage(tk.Frame):
     def __init__(self, parent, controller):

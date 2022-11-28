@@ -1,9 +1,8 @@
-from PIL import ImageTk, Image
-import tkinter as tk
 from tkinter import messagebox
-from UserProfile import*
+from UserProfile import GUIUserProfile
 from GUIStartPage import*
 from GUIContainer import*
+
 
 class GUILogInPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -23,16 +22,16 @@ class GUILogInPage(tk.Frame):
             self.pwd_entry.delete(0, 'end')
 
             if self.entered_email == "qqq" and self.entered_pwd == "aaa":
-                log_in_button1 = tk.Button(self, text=f"Welcome {self.entered_email} \n Press here to go to your profile",
-                                          width=40, height=10, fg='green', bg='white',
-                                          font=('Helvetica', '15', 'bold'), border=5,
-                                          command=lambda: controller.show_frame(GUIUserProfile))
+                log_in_button1 = tk.Button(self, text=f"Welcome {self.entered_email} \n"
+                                                      f" Press here to go to your profile",
+                                           width=40, height=10, fg='green', bg='white',
+                                           font=('Helvetica', '15', 'bold'), border=5,
+                                           command=lambda: controller.show_frame(GUIUserProfile))
                 log_in_button1.grid(row=2, column=3)
             elif self.entered_email != "qqq" and self.entered_pwd != "aaa":
                 messagebox.showerror("Error", "Invalid e-mail or password")
             elif self.entered_email == "" or self.entered_pwd == "":
                 messagebox.showerror("Error", "All fields are required")
-
 
         email_label = tk.Label(self, text="E-mail", font=("Goudy old style", 25, "bold"))
         email_label.grid(row=2, column=2, padx=20, pady=20)
@@ -49,13 +48,12 @@ class GUILogInPage(tk.Frame):
                                   command=log_in)
         log_in_button.grid(row=6, column=3)
 
-
         sau_label = tk.Label(self, text="Or", font=("Helvetica", 15))
         sau_label.grid(row=9, column=3, padx=30)
 
         create_account_button = tk.Button(self, text="Create account", width=30, height=2, fg='#d4ac74', bg='white',
-                                  font=('Helvetica', '16'), border=5,
-                                  command=lambda: controller.show_frame(GUIStartPage))
+                                          font=('Helvetica', '16'), border=5,
+                                          command=lambda: controller.show_frame(GUIStartPage))
         create_account_button.grid(row=11, column=3)
 
 

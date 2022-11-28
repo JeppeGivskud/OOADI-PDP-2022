@@ -25,7 +25,6 @@ class ChangeFrames(tk.Tk):
             frame.grid(row=0, column=0, sticky="nsew")
             self.show_frame(GUIStartPage)
 
-
     def show_frame(self, cont):
         frame = self.frames[cont]
         frame.tkraise()

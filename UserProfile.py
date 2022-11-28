@@ -1,9 +1,6 @@
-from PIL import ImageTk, Image
-import tkinter as tk
-from tkinter import messagebox
-from GUIContainer import*
-from GUIStartPage import GUIStartPage
+
 from GUILogin import*
+
 
 class GUIUserProfile(tk.Frame):
     def __init__(self, parent, controller):
@@ -20,8 +17,8 @@ class GUIUserProfile(tk.Frame):
         img1_label.grid(row=0, column=0)
 
         log_out_button = tk.Button(self, text="Log out", width=15, height=2, fg='#ba8d03',
-                                       font=('Helvetica', '15'), border=5,
-                                  command=lambda: controller.show_frame(GUIStartPage))
+                                   font=('Helvetica', '15'), border=5,
+                                   command=lambda: controller.show_frame(GUIStartPage))
         log_out_button.grid(row=0, column=8)
 
         personal_info = tk.Label(self, text="Personal Information", font=("Helvetica", 20), bg='white')
@@ -32,9 +29,8 @@ class GUIUserProfile(tk.Frame):
         user_info.grid(row=4, column=0)
 
         edit_prifile_button = tk.Button(self, text="Edit Profile", width=15, height=2, fg='white',
-                                   font=('Helvetica', '15'), background='#d4ac74', border=5)
+                                        font=('Helvetica', '15'), background='#d4ac74', border=5)
         edit_prifile_button.grid(row=5, column=0)
-
 
         purchases = tk.Label(self, text="Purchases", font=("Helvetica", 20), bg='white')
         purchases.grid(row=3, column=7)
@@ -43,10 +39,8 @@ class GUIUserProfile(tk.Frame):
         user_purcheses.grid(row=4, column=7)
 
         buy_ticket_button = tk.Button(self, text="Buy New Ticket", width=15, height=2, fg='white',
-                                   font=('Helvetica', '15'), background='#d4ac74', border=5)
+                                      font=('Helvetica', '15'), background='#d4ac74', border=5)
         buy_ticket_button.grid(row=5, column=7)
-
-
 
 
 if __name__ == "__main__":
