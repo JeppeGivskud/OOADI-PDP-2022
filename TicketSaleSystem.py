@@ -130,9 +130,8 @@ class GUIUserProfile(tk.Frame):
         personal_info = tk.Label(self, text="Personal Information", font=("Helvetica", 20), bg='white')
         personal_info.grid(row=3, column=0)
 
-        self.img3 = ImageTk.PhotoImage(Image.open("UserInfo.png"))
-        user_info = tk.Label(self, image=self.img3)
-        user_info.grid(row=4, column=0)
+        self.user_personal_info = tk.Text(self, width=25, height=15, bd=2, font=('Helvetica', '15'))
+        self.user_personal_info.grid(row=4, column=0)
 
         edit_prifile_button = tk.Button(self, text="Edit Profile", width=15, height=2, fg='white',
                                         font=('Helvetica', '15'), background='#d4ac74', border=5)
@@ -140,9 +139,9 @@ class GUIUserProfile(tk.Frame):
 
         purchases = tk.Label(self, text="Purchases", font=("Helvetica", 20), bg='white')
         purchases.grid(row=3, column=7)
-        self.img4 = ImageTk.PhotoImage(Image.open("UserPurchases.png"))
-        user_purcheses = tk.Label(self, image=self.img4)
-        user_purcheses.grid(row=4, column=7)
+
+        self.user_purcheses = tk.Text(self, width=55, height=15, bd=2, font=('Helvetica', '15'))
+        self.user_purcheses.grid(row=4, column=7)
 
         buy_ticket_button = tk.Button(self, text="Buy New Ticket", width=15, height=2, fg='white',
                                       font=('Helvetica', '15'), background='#d4ac74', border=5)
