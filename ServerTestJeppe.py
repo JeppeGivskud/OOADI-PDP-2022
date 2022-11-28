@@ -1,14 +1,25 @@
 import socket
 import threading
+from typing import Type
+
 from ListOfUsers import *
 
 
 class ClientThread(threading.Thread):
+    ListOfUsers: Type[ListOfUsers]
+
     def __init__(self, client_socket):
         threading.Thread.__init__(self)
         self.csocket = client_socket
-        self.Database = ListOfUsers  # initiere en database som kan tilføje brugerobjekter
-        ListOfUsers.Example()  # Laver 4 brugere som kan bruges som eksempler
+        self.database=ListOfUsers() # initiere en database som kan tilføje brugerobjekter
+        self.load_users()
+        repr(self.database)
+        #self.database.Example()
+        #ListOfUsers.Example()  # Laver 4 brugere som kan bruges som eksempler
+    def load_users(self):
+        filename = "AllUsers.txt"
+        with open(filename, "rb") as pickle_file:  # Open the file to read from
+            self.database = pickle.load(pickle_file)  # Load first object
 
     def run(self):
         with self.csocket:
