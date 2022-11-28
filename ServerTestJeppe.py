@@ -44,15 +44,16 @@ class ClientThread(threading.Thread):
 
     def login(self, datastring):
         if len(datastring)==2:
-            username=datastring[0]
+            e_mail=datastring[0]
             password=datastring[1]
             for user in self.database.customers:
-                if user.name == username:
-                    print("correct username")
+                if user.e_mail == e_mail:
+                    print("correct email")
                     if user.user_password == password:
                         print("correct password")
                         return self.send_pickled_object(user)
-                return self.send_text("Wrong password")
+                    return self.send_text("Wrong password")
+                return self.send_text("Wrong email")
             return self.send_text("No user exists with that name")
 
     def send_text(self,message):
