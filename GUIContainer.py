@@ -95,8 +95,7 @@ class GUILogInPage(tk.Frame):
         sau_label.grid(row=9, column=3, padx=30)
 
         create_account_button = tk.Button(self, text="Create account", width=30, height=2, fg='#d4ac74', bg='white',
-                                          font=('Helvetica', '16'), border=5,
-                                          command=lambda: controller.show_frame(GUIStartPage))
+                                          font=('Helvetica', '16'), border=5)
         create_account_button.grid(row=11, column=3)
 
 
