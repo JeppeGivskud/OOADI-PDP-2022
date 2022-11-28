@@ -10,10 +10,13 @@ class ClientThread(threading.Thread):
 
     def __init__(self, client_socket):
         threading.Thread.__init__(self)
-        self.csocket = client_socket
-        self.database=ListOfUsers() # initiere en database som kan tilføje brugerobjekter
+        self.database = ListOfUsers()  # initiere en database som kan tilføje brugerobjekter
         self.load_users()
+
+        print("Database loaded:")
         repr(self.database)
+
+        self.csocket = client_socket
         #self.database.Example()
         #ListOfUsers.Example()  # Laver 4 brugere som kan bruges som eksempler
     def load_users(self):
@@ -23,6 +26,7 @@ class ClientThread(threading.Thread):
 
     def run(self):
         with self.csocket:
+            self.csocket.sendall(b'Server connection')  # send string to client
             while True:
                 data = self.csocket.recv(1024)  # data received from client
                 self.check_password(data)
@@ -33,7 +37,11 @@ class ClientThread(threading.Thread):
 
     def check_password(self, username):
         if username == b'yvonne':
-            self.csocket.sendall(b'password')
+            self.send_pickled_object(self.database)
+    def send_pickled_object(self,object):
+        data_string = pickle.dumps(object)
+        self.csocket.sendall(data_string)  # send back echo string to client
+        print(f"Object sent to Server")
 
 
 if __name__ == "__main__":
