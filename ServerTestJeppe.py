@@ -43,24 +43,31 @@ class ClientThread(threading.Thread):
                     break
 
     def login(self, datastring):
-        username=datastring[0]
-        password=datastring[1]
-        for user in self.database.customers:
-            if user.name == username:
-                print("correct username")
-                if user.user_password == password:
-                    print("correct password")
-                    self.send_pickled_object(user)
+        if len(datastring)==2:
+            username=datastring[0]
+            password=datastring[1]
+            for user in self.database.customers:
+                if user.name == username:
+                    print("correct username")
+                    if user.user_password == password:
+                        print("correct password")
+                        return self.send_pickled_object(user)
+                return self.send_text("Wrong password")
+            return self.send_text("No user exists with that name")
+
+    def send_text(self,message):
+        self.csocket.sendall(message.encode())  # send back echo string to client
+        print(f'"{message}" sent to client')
 
     def send_pickled_object(self, object):
         data_string = pickle.dumps(object)
         self.csocket.sendall(data_string)  # send back echo string to client
-        print(f"Object sent to Server")
+        print(f"Object sent to client")
 
 
 if __name__ == "__main__":
     host = 'localhost'
-    port = 40000
+    port = 50000
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
         s.listen()

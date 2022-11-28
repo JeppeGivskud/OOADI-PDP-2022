@@ -9,6 +9,8 @@ class Order:
         self.order_id = self.generate_random_order_id()
         self.ticket_list = []
 
+    def __repr__(self):
+        return print(f' Order nr: {self.order_id} has {len(self.ticket_list)} Tickets')
     def generate_random_order_id(self):
         letters2 = string.ascii_lowercase
         return ''.join(random.choice(letters2) for i in range(10))

@@ -75,8 +75,6 @@ class GUILogInPage(tk.Frame):
                 log_in_button1.grid(row=2, column=3)
             elif entered_email != "qqq" and entered_pwd != "aaa":
                 messagebox.showerror("Error", "Invalid e-mail or password")
-            elif entered_email == "" or entered_pwd == "":
-                messagebox.showerror("Error", "All fields are required")
 
         email_label = tk.Label(self, text="E-mail", font=("Goudy old style", 25, "bold"))
         email_label.grid(row=2, column=2, padx=20, pady=20)
@@ -97,8 +95,7 @@ class GUILogInPage(tk.Frame):
         sau_label.grid(row=9, column=3, padx=30)
 
         create_account_button = tk.Button(self, text="Create account", width=30, height=2, fg='#d4ac74', bg='white',
-                                          font=('Helvetica', '16'), border=5,
-                                          command=lambda: controller.show_frame(GUIStartPage))
+                                          font=('Helvetica', '16'), border=5)
         create_account_button.grid(row=11, column=3)
 
 
@@ -117,8 +114,7 @@ class GUIUserProfile(tk.Frame):
         img1_label.grid(row=0, column=0)
 
         log_out_button = tk.Button(self, text="Log out", width=15, height=2, fg='#ba8d03',
-                                   font=('Helvetica', '15'), border=5,
-                                   command=lambda: controller.show_frame(GUIStartPage))
+                                   font=('Helvetica', '15'), border=5)
         log_out_button.grid(row=0, column=8)
 
         personal_info = tk.Label(self, text="Personal Information", font=("Helvetica", 20), bg='white')
