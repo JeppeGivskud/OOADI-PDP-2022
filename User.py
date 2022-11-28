@@ -22,7 +22,8 @@ class CostumerWithProfile(User):
         self.phone_number = phone_number
         self.order_list = []
     def __repr__(self):
-        return print(f' Order nr: {self.order_id} has {len(self.ticket_list)} Tickets')
+        return f'{self.name} has {len(self.order_list)} orders \n' \
+               f'Their e-mail is {self.e_mail} and their phone number is {self.phone_number}'
     def get_user_password(self):
         return self.user_password
 

@@ -10,7 +10,11 @@ class Order:
         self.ticket_list = []
 
     def __repr__(self):
-        return print(f' Order nr: {self.order_id} has {len(self.ticket_list)} Tickets')
+        print(f'Order: "{self.order_id}" has {len(self.ticket_list)} Tickets')
+        for sold_ticket in self.ticket_list:
+            print(f'{sold_ticket.sold_ticket.ticket_id} is for {sold_ticket.sold_ticket.date} and is a {sold_ticket.sold_ticket.ticket_type}')
+        return ''
+
     def generate_random_order_id(self):
         letters2 = string.ascii_lowercase
         return ''.join(random.choice(letters2) for i in range(10))

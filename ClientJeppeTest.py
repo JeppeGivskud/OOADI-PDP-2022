@@ -12,7 +12,7 @@ class Client():
         self.connect()
         self.recieve_text()
 
-        self.UserData = CostumerWithProfile
+        self.User = CostumerWithProfile
 
     def connect(self):
         self.socket.connect((self.HOST, self.PORT))
@@ -44,10 +44,10 @@ class Client():
             if test == 'Bye':
                 print("Closing connection")
         except:
-            data_variable = pickle.loads(data)
-            print(data_variable)
-            self.UserData = data_variable
-            print(self.UserData.order_list)
+            User = pickle.loads(data)
+            print(User)
+            self.User = User
+            print(self.User.order_list[0])
             #print(self.UserData.order_list[0].order_id)
            # print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_id)
            # print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_type)
