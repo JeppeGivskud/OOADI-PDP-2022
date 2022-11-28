@@ -24,8 +24,6 @@ class ChangeFrames(tk.Tk):
             frame.grid(row=0, column=0, sticky="nsew")
             self.show_frame(GUIStartPage)
 
-        #Client stuff
-
     def show_frame(self, cont):
         frame = self.frames[cont]
         frame.tkraise()
@@ -63,13 +61,20 @@ class GUILogInPage(tk.Frame):
         log_in = tk.Label(self, text="Log in", font=("Helvetica", 25))
         log_in.grid(row=1, padx=10, column=2, pady=50)
 
+        #Client stuff
+        self.C=Client()
+        self.user=CostumerWithProfile
         def log_in():
             entered_email = self.email_entry.get()
             self.email_entry.delete(0, 'end')
             entered_pwd = self.pwd_entry.get()
             self.pwd_entry.delete(0, 'end')
 
-            if entered_email == "qqq" and entered_pwd == "aaa":
+            # Client stuffs
+            self.C.connect()
+            self.C.login(entered_email,entered_pwd)
+            self.C.disconnect()
+            if len(self.C.User.get_order_list())>0:
                 log_in_button1 = tk.Button(self, text=f"Welcome {entered_email} \n"
                                                       f" Press here to go to your profile",
                                            width=40, height=10, fg='green', bg='white',
@@ -100,6 +105,8 @@ class GUILogInPage(tk.Frame):
         create_account_button = tk.Button(self, text="Create account", width=30, height=2, fg='#d4ac74', bg='white',
                                           font=('Helvetica', '16'), border=5)
         create_account_button.grid(row=11, column=3)
+    def send_user_info(self):
+        return self.user
 
 
 class GUIUserProfile(tk.Frame):

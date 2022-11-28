@@ -9,13 +9,14 @@ class Client():
         self.HOST = '127.0.0.1'
         self.PORT = 50000
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.connect()
-        self.recieve_text()
+        #self.connect()
+        #
 
         self.User = CostumerWithProfile
 
     def connect(self):
         self.socket.connect((self.HOST, self.PORT))
+        self.recieve_text()
 
     def send_text(self, message):
         self.socket.sendall(message.encode())
@@ -25,17 +26,15 @@ class Client():
         self.socket.sendall(message.encode())
         self.recieve_stuff()
 
-    def login(self, username, password):
-        message = f"{username};{password}"
-        self.socket.sendall(message.encode())
-        self.recieve_stuff()
-
     def recieve_text(self):  # bruges ikke
         data = self.socket.recv(1024)
         print('From server:', data.decode())
         if data.decode() == 'Bye':
             print("Closing connection")
-
+    def login(self, username, password):
+        message = f"{username};{password}"
+        self.socket.sendall(message.encode())
+        self.recieve_stuff()
     def recieve_stuff(self):
         data = self.socket.recv(4096)
         try:
@@ -49,8 +48,8 @@ class Client():
             self.User = User
             print(self.User.order_list[0])
             #print(self.UserData.order_list[0].order_id)
-           # print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_id)
-           # print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_type)
+            #print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_id)
+            #print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_type)
             #print(self.UserData.order_list[0].ticket_list[0].date)
 
     def disconnect(self):
@@ -60,6 +59,7 @@ class Client():
 
 if __name__ == "__main__":
     C = Client()
+    C.connect()
     while True:
         username = input("Username: ")
         password = input("Password: ")
