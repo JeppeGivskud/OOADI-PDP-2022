@@ -1,7 +1,6 @@
 import pickle
 import socket
-import ListOfUsers
-
+from User import CostumerWithProfile
 # No s.close is needed
 class Client():
     def __init__(self):
@@ -11,7 +10,7 @@ class Client():
         self.connect()
         self.recieve_text()
 
-        self.ListOfUsers=ListOfUsers
+        self.UserData=CostumerWithProfile
 
     def connect(self):
         self.socket.connect((self.HOST, self.PORT))
@@ -36,12 +35,14 @@ class Client():
             print("Closing connection")
     def recieve_object(self):
         data = self.socket.recv(4096)
-        #print('Ecco', repr(data))
         data_variable = pickle.loads(data)
         print(data_variable)
-        self.ListOfUsers=data_variable
-        #if data.decode() == 'Bye':
-        #    print("Closing connection")
+        self.UserData=data_variable
+        print(self.UserData.order_list)
+        print(self.UserData.order_list[0].order_id)
+        print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_id)
+        print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_type)
+        print(self.UserData.order_list[0].ticket_list[0].date)
 
     def disconnect(self):
         self.send_text("Bye")
