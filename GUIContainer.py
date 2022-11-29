@@ -3,43 +3,39 @@ import tkinter as tk
 from tkinter import messagebox
 
 
-class ChangeFrames(tk.Tk):
+class PagesContainer(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-        container = tk.Frame(self)
+        pages_container = tk.Frame(self)
 
-        container.pack(side="top", fill="both", expand=True)
+        pages_container.pack(side="top", fill="both", expand=True)
 
-        container.grid_rowconfigure(0, weight=1)
-        container.grid_columnconfigure(0, weight=1)
+        self.pages = {}
 
-        self.frames = {}
+        for Page in (GUIStartPage, GUILogInPage, GUIUserProfile):
 
-        for F in (GUIStartPage, GUILogInPage, GUIUserProfile):
+            page = Page(pages_container, self)
+            self.pages[Page] = page
+            page.grid(row=0, column=0, sticky="nsew")
+            self.show_page(GUIStartPage)
 
-            frame = F(container, self)
-            self.frames[F] = frame
-            frame.grid(row=0, column=0, sticky="nsew")
-            self.show_frame(GUIStartPage)
-
-    def show_frame(self, cont):
-        frame = self.frames[cont]
-        frame.tkraise()
+    def show_page(self, this_page):
+        page = self.pages[this_page]
+        page.tkraise()
 
 
 class GUIStartPage(tk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent, change_page):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self)
-        label.grid(rowspan=15, columnspan=9)
+
 
         self.img1 = ImageTk.PhotoImage(Image.open("Tivoli.png"))
         img1_label = tk.Label(self, image=self.img1)
         img1_label.grid(row=0, column=0)
         log_in_button = tk.Button(self, text="Log in", width=15, height=2, fg='#cd863b',
                                   font=('Helvetica', '15'), border=5,
-                                  command=lambda: controller.show_frame(GUILogInPage))
+                                  command=lambda: change_page.show_page(GUILogInPage))
         log_in_button.grid(row=0, column=7)
         self.img2 = ImageTk.PhotoImage(Image.open("Tivoli1.png"))
         img2_label = tk.Label(self, image=self.img2)
@@ -50,13 +46,14 @@ class GUIStartPage(tk.Frame):
 
 
 class GUILogInPage(tk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent, change_page):
         tk.Frame.__init__(self, parent)
-        self.label = tk.Label(self)
-        self.label.grid(rowspan=15, columnspan=9)
+
+
         self.img1 = ImageTk.PhotoImage(Image.open("Tivoli.png"))
         img1_label = tk.Label(self, image=self.img1)
         img1_label.grid(row=0, column=0)
+
         log_in = tk.Label(self, text="Log in", font=("Helvetica", 25))
         log_in.grid(row=1, padx=10, column=2, pady=50)
 
@@ -71,7 +68,7 @@ class GUILogInPage(tk.Frame):
                                                       f" Press here to go to your profile",
                                            width=40, height=10, fg='green', bg='white',
                                            font=('Helvetica', '15', 'bold'), border=5,
-                                           command=lambda: controller.show_frame(GUIUserProfile))
+                                           command=lambda: change_page.show_page(GUIUserProfile))
                 log_in_button1.grid(row=2, column=3)
             elif entered_email != "qqq" and entered_pwd != "aaa":
                 messagebox.showerror("Error", "Invalid e-mail or password")
@@ -100,10 +97,9 @@ class GUILogInPage(tk.Frame):
 
 
 class GUIUserProfile(tk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent, change_page):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self)
-        label.grid(rowspan=14, columnspan=9)
+
 
         self.img1 = ImageTk.PhotoImage(Image.open("TivoliBg.png"))
         img1_label = tk.Label(self, image=self.img1)
@@ -120,9 +116,8 @@ class GUIUserProfile(tk.Frame):
         personal_info = tk.Label(self, text="Personal Information", font=("Helvetica", 20), bg='white')
         personal_info.grid(row=3, column=0)
 
-        self.img3 = ImageTk.PhotoImage(Image.open("UserInfo.png"))
-        user_info = tk.Label(self, image=self.img3)
-        user_info.grid(row=4, column=0)
+        self.user_personal_info = tk.Text(self, width=25, height=15, bd=2, font=('Helvetica', '15'))
+        self.user_personal_info.grid(row=4, column=0)
 
         edit_prifile_button = tk.Button(self, text="Edit Profile", width=15, height=2, fg='white',
                                         font=('Helvetica', '15'), background='#d4ac74', border=5)
@@ -130,9 +125,10 @@ class GUIUserProfile(tk.Frame):
 
         purchases = tk.Label(self, text="Purchases", font=("Helvetica", 20), bg='white')
         purchases.grid(row=3, column=7)
-        self.img4 = ImageTk.PhotoImage(Image.open("UserPurchases.png"))
-        user_purcheses = tk.Label(self, image=self.img4)
-        user_purcheses.grid(row=4, column=7)
+
+        self.user_purcheses = tk.Text(self, width=55, height=15, bd=2, font=('Helvetica', '15'))
+        self.user_purcheses.grid(row=4, column=7)
+
 
         buy_ticket_button = tk.Button(self, text="Buy New Ticket", width=15, height=2, fg='white',
                                       font=('Helvetica', '15'), background='#d4ac74', border=5)
@@ -140,5 +136,5 @@ class GUIUserProfile(tk.Frame):
 
 
 if __name__ == "__main__":
-    myapp = ChangeFrames()
+    myapp = PagesContainer()
     myapp.mainloop()
