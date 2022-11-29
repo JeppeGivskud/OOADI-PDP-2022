@@ -129,9 +129,7 @@ class GUIUserProfile(tk.Frame):
         img1_label = tk.Label(self, image=self.img2)
         img1_label.grid(row=0, column=0)
 
-        self.log_out_button = tk.Button(self, text="Log out", width=15, height=2, fg='#ba8d03',
-                                   font=('Helvetica', '15'), border=5)
-        self.log_out_button.grid(row=0, column=8)
+
 
         self.personal_info = tk.Label(self, text="Personal Information", font=("Helvetica", 20), bg='white')
         self.personal_info.grid(row=3, column=0)
@@ -139,9 +137,6 @@ class GUIUserProfile(tk.Frame):
         self.user_personal_info = tk.Text(self, width=25, height=15, bd=2, font=('Helvetica', '15'))
         self.user_personal_info.grid(row=4, column=0)
 
-        self.edit_prifile_button = tk.Button(self, text="Edit Profile", width=15, height=2, fg='white',
-                                        font=('Helvetica', '15'), background='#d4ac74', border=5)
-        self.edit_prifile_button.grid(row=5, column=0)
 
         self.purchases = tk.Label(self, text="Purchases", font=("Helvetica", 20), bg='white')
         self.purchases.grid(row=3, column=7)
@@ -157,6 +152,14 @@ class GUIUserProfile(tk.Frame):
                                        font=('Helvetica', '16'), border=5,
                                        command=self.update_text)
         self.update_button.grid(row=6, column=3)
+
+        self.log_out_button = tk.Button(self, text="Log out", width=15, height=2, fg='#ba8d03',
+                                        font=('Helvetica', '15'), border=5)
+        self.log_out_button.grid(row=0, column=8)
+
+        self.edit_prifile_button = tk.Button(self, text="Edit Profile", width=15, height=2, fg='white',
+                                             font=('Helvetica', '15'), background='#d4ac74', border=5)
+        self.edit_prifile_button.grid(row=5, column=0)
     def update_text(self):
         self.user = PagesContainer.user
 

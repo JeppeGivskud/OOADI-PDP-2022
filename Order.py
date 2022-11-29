@@ -1,7 +1,7 @@
 import pickle
-from OneDayTicket import*
-from SoldTicket import*
-from User import*
+from OneDayTicket import *
+from SoldTicket import *
+from User import *
 
 
 class Order:
@@ -10,10 +10,14 @@ class Order:
         self.ticket_list = []
 
     def __repr__(self):
+        counter=1
         print(f'Order: "{self.order_id}" has {len(self.ticket_list)} Tickets')
+        representation = f'Order: "{self.order_id}" has {len(self.ticket_list)} Tickets for "{self.ticket_list[0].date}" \n'
         for sold_ticket in self.ticket_list:
-            print(f'{sold_ticket.sold_ticket.ticket_id} is for {sold_ticket.sold_ticket.date} and is a {sold_ticket.sold_ticket.ticket_type}')
-        return ''
+            representation+=f'Ticket {counter}: "{sold_ticket.sold_ticket.ticket_id}"' \
+                            f'is a "{sold_ticket.sold_ticket.ticket_type}"\n'
+            counter+=1
+        return representation
 
     def generate_random_order_id(self):
         letters2 = string.ascii_lowercase
@@ -24,10 +28,12 @@ class Order:
 
     def collect_sold_tickets(self, sold_ticket):
         self.ticket_list.append(sold_ticket)
-    def create_sold_ticket(self,owner_name,date):
+
+    def create_sold_ticket(self, owner_name, date):
         self.ticket_list.append(SoldTicket(owner_name, date))
         self.ticket_list.append(SoldTicket(owner_name, date))
         self.ticket_list.append(SoldTicket(owner_name, date))
+
 
 if __name__ == "__main__":
     MyUser = User("Yvonne Nielsen", "iamyvonne@nielsen.dk")
