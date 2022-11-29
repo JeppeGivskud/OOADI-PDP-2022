@@ -73,7 +73,6 @@ class GUILogInPage(tk.Frame):
 
             # Client stuffs
             self.C.login(entered_email, entered_pwd)
-            #print(self.user)
             PagesContainer.user = self.C.User
 
             if len(PagesContainer.user.get_order_list()) > 0:
