@@ -33,14 +33,16 @@ class ClientThread(threading.Thread):
 
                 datastring = data.decode()
                 datastring = datastring.split(";")
-                print(datastring)
-                self.login(datastring)
-                # self.check_password(data)
-                # self.csocket.sendall(data)  # send back echo string to client
-                if (data.decode() == 'Bye'):
+                if (datastring[0] == 'Bye'):
                     print("Closing connection")
                     self.csocket.sendall(b'Bye')  # send back echo string to client
                     break
+                else:
+                    print(datastring)
+                    self.login(datastring)
+                # self.check_password(data)
+                # self.csocket.sendall(data)  # send back echo string to client
+
 
     def login(self, datastring):
         if len(datastring)==2:
@@ -73,7 +75,7 @@ if __name__ == "__main__":
         s.bind((host, port))
         s.listen()
         range = 0
-        while range < 1:
+        while range < 100:
             client_socket, client_address = s.accept()  # connect to a new client
             client_thread = ClientThread(client_socket)  # start a new thread
             client_thread.start()

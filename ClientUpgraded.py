@@ -1,5 +1,7 @@
 import pickle
 import socket
+import sys
+
 from User import CostumerWithProfile
 
 
@@ -10,7 +12,7 @@ class Client():
         self.PORT = 50000
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #self.connect()
-        #
+
 
         self.User = CostumerWithProfile
 
@@ -37,11 +39,12 @@ class Client():
         self.recieve_stuff()
     def recieve_stuff(self):
         data = self.socket.recv(4096)
+        Isbye=False
         try:
             test = data.decode()
             print('From server:', test)
-            if test == 'Bye':
-                print("Closing connection")
+            if test=='Bye':
+                Isbye=True
         except:
             User = pickle.loads(data)
             print(User)
@@ -51,6 +54,9 @@ class Client():
             #print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_id)
             #print(self.UserData.order_list[0].ticket_list[0].sold_ticket.ticket_type)
             #print(self.UserData.order_list[0].ticket_list[0].date)
+        if Isbye:
+            print("Closing connection")
+            sys.exit()
 
     def disconnect(self):
         self.send_text("Bye")
@@ -61,8 +67,8 @@ if __name__ == "__main__":
     C = Client()
     C.connect()
     while True:
-        username = input("Username: ")
+        e_mail = input("E-mail: ")
         password = input("Password: ")
 
-        C.login(username, password)
+        C.login(e_mail, password)
     C.disconnect()

@@ -1,5 +1,5 @@
-from ClientUpgraded import*
-from PIL import  ImageTk, Image
+from ClientUpgraded import *
+from PIL import ImageTk, Image
 import tkinter as tk
 from tkinter import messagebox
 
@@ -15,11 +15,12 @@ class PagesContainer(tk.Tk):
         self.pages = {}
 
         for Page in (GUIStartPage, GUILogInPage, GUIUserProfile):
-
             page = Page(pages_container, self)
             self.pages[Page] = page
             page.grid(row=0, column=0, sticky="nsew")
             self.show_page(GUIStartPage)
+
+        self.user = CostumerWithProfile
 
     def show_page(self, this_page):
         page = self.pages[this_page]
@@ -56,9 +57,11 @@ class GUILogInPage(tk.Frame):
         log_in = tk.Label(self, text="Log in", font=("Helvetica", 25))
         log_in.grid(row=1, padx=10, column=2, pady=50)
 
-        #Client stuff
+        # Client stuff
         self.C = Client()
-        self.user = CostumerWithProfile
+        self.C.connect()
+
+        # self.user = CostumerWithProfile
 
         def log_in():
             entered_email = self.email_entry.get()
@@ -67,17 +70,19 @@ class GUILogInPage(tk.Frame):
             self.pwd_entry.delete(0, 'end')
 
             # Client stuffs
-            self.C.connect()
             self.C.login(entered_email, entered_pwd)
-            self.C.disconnect()
-            if len(self.C.User.get_order_list())>0:
+            #print(self.user)
+            PagesContainer.user = self.C.User
+
+            if len(self.C.User.get_order_list()) > 0:
+                self.C.disconnect()
                 log_in_button1 = tk.Button(self, text=f"Welcome {entered_email} \n"
                                                       f" Press here to go to your profile",
                                            width=40, height=10, fg='green', bg='white',
                                            font=('Helvetica', '15', 'bold'), border=5,
                                            command=lambda: change_page.show_page(GUIUserProfile))
                 log_in_button1.grid(row=2, column=3)
-            elif entered_email != "qqq" and entered_pwd != "aaa":
+            else:
                 messagebox.showerror("Error", "Invalid e-mail or password")
 
         email_label = tk.Label(self, text="E-mail", font=("Goudy old style", 25, "bold"))
@@ -102,8 +107,6 @@ class GUILogInPage(tk.Frame):
                                           font=('Helvetica', '16'), border=5)
         create_account_button.grid(row=11, column=3)
 
-    def send_user_info(self):
-        return self.user
 
 
 class GUIUserProfile(tk.Frame):
