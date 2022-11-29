@@ -113,8 +113,7 @@ class GUILogInPage(tk.Frame):
 class GUIUserProfile(tk.Frame):
     def __init__(self, parent, change_page):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self)
-        label.grid(rowspan=14, columnspan=9)
+
 
         #Client stuff
         self.user = CostumerWithProfile
@@ -147,10 +146,10 @@ class GUIUserProfile(tk.Frame):
                                       font=('Helvetica', '15'), background='#d4ac74', border=5)
         self.buy_ticket_button.grid(row=5, column=7)
 
-        self.update_button = tk.Button(self, text="Update user info", width=30, height=2, fg='white', bg='#d4ac74',
+        self.update_button = tk.Button(self, text="Update user info", width=20, height=2, fg='white', bg='green',
                                        font=('Helvetica', '16'), border=5,
                                        command=self.update_text)
-        self.update_button.grid(row=6, column=3)
+        self.update_button.grid(row=3, column=7)
 
         self.log_out_button = tk.Button(self, text="Log out", width=15, height=2, fg='#ba8d03',
                                         font=('Helvetica', '15'), border=5)
@@ -165,8 +164,8 @@ class GUIUserProfile(tk.Frame):
         self.user_personal_info.delete(0.0, 100.0)
         self.user_personal_info.insert(0.0, repr(self.user))
 
-        self.user_purcheses.delete(0.0,100.0)
-        self.user_purcheses.insert(0.0,repr(self.user.order_list[0]))
+        self.user_purcheses.delete(0.0, 100.0)
+        self.user_purcheses.insert(0.0, repr(self.user.order_list[0]))
 
 
 if __name__ == "__main__":
