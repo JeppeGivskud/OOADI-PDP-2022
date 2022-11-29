@@ -6,6 +6,8 @@ from tkinter import messagebox
 
 class PagesContainer(tk.Tk):
 
+    user = CostumerWithProfile
+
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         pages_container = tk.Frame(self)
@@ -20,7 +22,7 @@ class PagesContainer(tk.Tk):
             page.grid(row=0, column=0, sticky="nsew")
             self.show_page(GUIStartPage)
 
-        self.user = CostumerWithProfile
+        #self.user = CostumerWithProfile
 
     def show_page(self, this_page):
         page = self.pages[this_page]
@@ -74,7 +76,7 @@ class GUILogInPage(tk.Frame):
             #print(self.user)
             PagesContainer.user = self.C.User
 
-            if len(self.C.User.get_order_list()) > 0:
+            if len(PagesContainer.user.get_order_list()) > 0:
                 self.C.disconnect()
                 log_in_button1 = tk.Button(self, text=f"Welcome {entered_email} \n"
                                                       f" Press here to go to your profile",
@@ -115,6 +117,10 @@ class GUIUserProfile(tk.Frame):
         label = tk.Label(self)
         label.grid(rowspan=14, columnspan=9)
 
+        #Client stuff
+        self.user = CostumerWithProfile
+        print(self.user)
+
         self.img1 = ImageTk.PhotoImage(Image.open("TivoliBg.png"))
         img1_label = tk.Label(self, image=self.img1)
         img1_label.grid(row=0, column=0, rowspan=14, columnspan=9)
@@ -123,29 +129,42 @@ class GUIUserProfile(tk.Frame):
         img1_label = tk.Label(self, image=self.img2)
         img1_label.grid(row=0, column=0)
 
-        log_out_button = tk.Button(self, text="Log out", width=15, height=2, fg='#ba8d03',
+        self.log_out_button = tk.Button(self, text="Log out", width=15, height=2, fg='#ba8d03',
                                    font=('Helvetica', '15'), border=5)
-        log_out_button.grid(row=0, column=8)
+        self.log_out_button.grid(row=0, column=8)
 
-        personal_info = tk.Label(self, text="Personal Information", font=("Helvetica", 20), bg='white')
-        personal_info.grid(row=3, column=0)
+        self.personal_info = tk.Label(self, text="Personal Information", font=("Helvetica", 20), bg='white')
+        self.personal_info.grid(row=3, column=0)
 
         self.user_personal_info = tk.Text(self, width=25, height=15, bd=2, font=('Helvetica', '15'))
         self.user_personal_info.grid(row=4, column=0)
 
-        edit_prifile_button = tk.Button(self, text="Edit Profile", width=15, height=2, fg='white',
+        self.edit_prifile_button = tk.Button(self, text="Edit Profile", width=15, height=2, fg='white',
                                         font=('Helvetica', '15'), background='#d4ac74', border=5)
-        edit_prifile_button.grid(row=5, column=0)
+        self.edit_prifile_button.grid(row=5, column=0)
 
-        purchases = tk.Label(self, text="Purchases", font=("Helvetica", 20), bg='white')
-        purchases.grid(row=3, column=7)
+        self.purchases = tk.Label(self, text="Purchases", font=("Helvetica", 20), bg='white')
+        self.purchases.grid(row=3, column=7)
 
         self.user_purcheses = tk.Text(self, width=55, height=15, bd=2, font=('Helvetica', '15'))
         self.user_purcheses.grid(row=4, column=7)
 
-        buy_ticket_button = tk.Button(self, text="Buy New Ticket", width=15, height=2, fg='white',
+        self.buy_ticket_button = tk.Button(self, text="Buy New Ticket", width=15, height=2, fg='white',
                                       font=('Helvetica', '15'), background='#d4ac74', border=5)
-        buy_ticket_button.grid(row=5, column=7)
+        self.buy_ticket_button.grid(row=5, column=7)
+
+        self.update_button = tk.Button(self, text="Update user info", width=30, height=2, fg='white', bg='#d4ac74',
+                                       font=('Helvetica', '16'), border=5,
+                                       command=self.update_text)
+        self.update_button.grid(row=6, column=3)
+    def update_text(self):
+        self.user = PagesContainer.user
+
+        self.user_personal_info.delete(0.0, 100.0)
+        self.user_personal_info.insert(0.0, repr(self.user))
+
+        self.user_purcheses.delete(0.0,100.0)
+        self.user_purcheses.insert(0.0,repr(self.user.order_list[0]))
 
 
 if __name__ == "__main__":
