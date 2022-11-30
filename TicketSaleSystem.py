@@ -75,7 +75,7 @@ class GUILogInPage(tk.Frame):
             self.C.login(entered_email, entered_pwd)
             PagesContainer.user = self.C.User
 
-            if len(PagesContainer.user.get_order_list()) > 0:
+            if len(self.C.User.order_list) > 0:
                 self.C.disconnect()
                 log_in_button1 = tk.Button(self, text=f"Welcome {entered_email} \n"
                                                       f" Press here to go to your profile",
